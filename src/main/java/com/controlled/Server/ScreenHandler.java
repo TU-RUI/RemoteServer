@@ -32,9 +32,10 @@ public class ScreenHandler extends IoHandlerAdapter {
 		String msgType = objectMessage.getMsgType();
 		if(msgType != null){
 			if(msgType.equals(MsgType.MONITOR)){
-				ScreenModule.getInstance().start();
+				new Thread(new ScreenModule()).start();
+//				ScreenModule.getInstance().start();
 			}else if(msgType.equals(MsgType.STOP_MONITOR)){
-				ScreenModule.flag = false;
+				ScreenModule.getInstance().flag = false;
 			}else {
 				ScreenModule.getInstance().handleMessage(objectMessage);
 			}

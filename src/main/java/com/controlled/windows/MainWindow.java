@@ -34,7 +34,7 @@ public class MainWindow extends Application {
 			BusinessModule.getInstance().closeSession();
 			System.exit(0);
 		});
-		ScreenModule.getInstance();
+		new ScreenModule();
 		stage.show();
 	}
 
@@ -64,34 +64,34 @@ public class MainWindow extends Application {
 		gridpane.add(name, 1, 0);
 		gridpane.add(stat, 0, 1);
 		tab1.setContent(gridpane);
-
-		Tab tab2 = new Tab();
-		tab2.setClosable(false);
-		Label label2 = new Label("设置");
-		label2.setRotate(90);
-		stp = new StackPane(new Group(label2));
-		stp.setRotate(90);
-		tab2.setGraphic(stp);
-		Button logout = new Button("注销");
-		logout.setOnAction(e->{
-			//注销
-			//TODO
-		});
-		Button changepwd = new Button("更改密码");
-		changepwd.setOnAction(e->{
-			//更改密码
-			//TODO
-		});
-		CheckBox checkBox = new CheckBox("开机启动");
-		checkBox.setSelected(false);
-		GridPane gridpane1 = new GridPane();
-		gridpane1.add(checkBox, 0, 0);
-		gridpane1.add(changepwd, 0, 1);
-		gridpane1.add(logout, 1, 1);
-		tab2.setContent(gridpane1);
+//
+//		Tab tab2 = new Tab();
+//		tab2.setClosable(false);
+//		Label label2 = new Label("设置");
+//		label2.setRotate(90);
+//		stp = new StackPane(new Group(label2));
+//		stp.setRotate(90);
+//		tab2.setGraphic(stp);
+//		Button logout = new Button("注销");
+//		logout.setOnAction(e->{
+//			//注销
+//			//TODO
+//		});
+//		Button changepwd = new Button("更改密码");
+//		changepwd.setOnAction(e->{
+//			//更改密码
+//			//TODO
+//		});
+//		CheckBox checkBox = new CheckBox("开机启动");
+//		checkBox.setSelected(false);
+//		GridPane gridpane1 = new GridPane();
+//		gridpane1.add(checkBox, 0, 0);
+//		gridpane1.add(changepwd, 0, 1);
+//		gridpane1.add(logout, 1, 1);
+//		tab2.setContent(gridpane1);
 		
 		
-		tabPane.getTabs().addAll(tab1,tab2);
+		tabPane.getTabs().addAll(tab1);
 		tabPane.setTabMinHeight(100);
 		tabPane.setTabMaxHeight(100);
 

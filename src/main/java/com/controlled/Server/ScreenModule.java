@@ -34,7 +34,7 @@ import com.server.utils.CoverFXtoAWT;
 import com.server.utils.ImageCompress;
 import com.server.utils.PropertiesUtil;
 
-public class ScreenModule extends Thread {
+public class ScreenModule implements Runnable{
 
 	private static ScreenModule screenModule = null;
 
@@ -43,13 +43,13 @@ public class ScreenModule extends Thread {
 	private final static Logger LOGGER = LoggerFactory
 			.getLogger(ScreenModule.class);
 
-	private IoConnector connector;
-	private IoSession session;
+	private static IoConnector connector;
+	private static IoSession session;
 
 	private static final String Address = PropertiesUtil.GetValueByKey("host");
 	private static final int PORT = 5433;
 
-	public static boolean flag = false;
+	public boolean flag = false;
 
 	private static int width;
 	private static int height;
@@ -62,8 +62,8 @@ public class ScreenModule extends Thread {
 		}
 		return screenModule;
 	}
-
-	private ScreenModule() {
+	
+	static{
 		connector = new NioSocketConnector();
 		connector.setHandler(ScreenHandler.getInstance());
 		connector.getFilterChain().addLast("logger", new LoggingFilter());
@@ -93,7 +93,6 @@ public class ScreenModule extends Thread {
 				}
 			}
 		});
-		flag = true;
 		try {
 			robot = new Robot();
 		} catch (AWTException e) {
@@ -102,6 +101,13 @@ public class ScreenModule extends Thread {
 		width = (int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
 		height = (int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
 		LOGGER.info("开始传送画面");
+		
+		
+	}
+
+	public ScreenModule() {
+		screenModule = this;
+		flag = true;
 	}
 
 	@Override
